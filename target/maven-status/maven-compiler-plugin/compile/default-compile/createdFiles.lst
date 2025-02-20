@@ -1,0 +1,6 @@
+com\mycompany\jacartavisa\Bean\NavigationBean.class
+LieuBean.class
+com\mycompany\jacartavisa\business\LieuEntrepriseBean.class
+entities\Lieu.class
+com\mycompany\jacartavisa\Bean\ConvertisseurBean.class
+com\mycompany\jacartavisa\Bean\WelcomeBean.class

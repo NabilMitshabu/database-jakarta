@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+    <h:head>
+        <title>À propos de Jakarta</title>
+        <!-- Intégration de Bootstrap -->
+        <h:outputStylesheet name="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+        <style>
+            body {
+                background-color: #f8f9fa;
+                font-family: Arial, sans-serif;
+            }
+            .container {
+                max-width: 800px;
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            h1 {
+                color: #007bff;
+                margin-bottom: 20px;
+            }
+            .btn-custom {
+                background-color: #007bff;
+                color: white;
+                border-radius: 5px;
+                padding: 10px 20px;
+                margin: 10px;
+            }
+            .btn-custom:hover {
+                background-color: #0056b3;
+            }
+            .footer {
+                margin-top: 30px;
+                color: #6c757d;
+                padding: 15px;
+                background-color: #343a40;
+                text-align: center;
+                border-radius: 5px;
+                color: white;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="container mt-5">
+            <h1>À propos de Jakarta</h1>
+            <p>Jakarta, située sur l'île de Java, est une métropole dynamique mêlant tradition et modernité. C'est le cœur économique, culturel et politique de l'Indonésie.</p>
+            <p>Découvrez ses monuments emblématiques, sa cuisine variée et son ambiance unique.</p>
+            <div>
+                <h:form>
+                    <h:commandButton value="Retour à l'Index" action="index" styleClass="btn btn-custom"/>
+                </h:form>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; Welcome to Jakarta.</p>
+        </div>
+        <!-- Bootstrap JS -->
+        <h:outputScript name="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"/>
+    </h:body>
+</html>
