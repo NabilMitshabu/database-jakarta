@@ -50,4 +50,12 @@ public class LieuEntrepriseBean {
     public Lieu trouverLieuParId(int id) {
         return em.find(Lieu.class, id);
     }
+    
+    @Transactional
+    public void modifierLieu(Lieu lieu){
+        if(lieu != null){
+            em.merge(lieu);
+            
+        }
+    }
 }

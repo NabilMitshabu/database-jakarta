@@ -74,28 +74,28 @@
                     <div class="card p-4">
                         <h2 class="header-title">Liste des Lieux</h2>
                         <h:dataTable value="#{lieuBean.lieux}" var="lieu" class="table table-striped table-bordered">
-                            <h:column>
-                                <f:facet name="header"><b>Nom</b></f:facet>
-                                #{lieu.nom}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><b>Description</b></f:facet>
-                                #{lieu.description}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><b>Latitude</b></f:facet>
-                                #{lieu.latitude}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><b>Longitude</b></f:facet>
-                                #{lieu.longitude}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header"><b>Actions</b></f:facet>
-                                <h:commandButton value="Modifier" action="#{lieuBean.modifierLieu(lieu)}" class="btn btn-warning btn-sm"/>
-                                <h:commandButton value="Supprimer" action="#{lieuBean.supprimerLieu(lieu)}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce lieu ?');"/>
-                            </h:column>
-                        </h:dataTable>
+                        <h:column>
+                            <f:facet name="header"><b>Nom</b></f:facet>
+                            #{lieu.nom}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><b>Description</b></f:facet>
+                            #{lieu.description}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><b>Latitude</b></f:facet>
+                            #{lieu.latitude}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><b>Longitude</b></f:facet>
+                            #{lieu.longitude}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"><b>Actions</b></f:facet>
+                            <h:commandButton value="Modifier" action="#{lieuBean.selectLieu(lieu)}" class="btn btn-warning btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir modifier ce lieu ?');" />
+                            <h:commandButton value="Supprimer" action="#{lieuBean.supprimerLieu(lieu)}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce lieu ?');"/>
+                        </h:column>
+                    </h:dataTable>
                     </div>
                 </div>
             </div>

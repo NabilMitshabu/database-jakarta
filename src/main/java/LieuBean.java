@@ -19,6 +19,7 @@ public class LieuBean implements Serializable{
 
     @Inject
     private LieuEntrepriseBean lieuEntrepriseBean;
+    
     private Lieu lieu;
 
     public String getNom() { return nom; }
@@ -40,13 +41,32 @@ public class LieuBean implements Serializable{
             lieuEntrepriseBean.ajouterLieuEntreprise(nom, description, latitude, longitude);
         }
     }
-        public void modifierLieu(Lieu lieu) {
-        // Logique pour modifier le lieu
-        this.lieu = lieu; // Mettez à jour les informations dans le formulaire
+        public void modifierLieu() {
+        if (lieu != null) {
+            lieuEntrepriseBean.modifierLieu(lieu);
+            resetFields();
+        }
     }
 
     public void supprimerLieu(Lieu lieu) {
-        // Logique pour supprimer le lieu de la liste
-        lieux.remove(lieu);
+        if (lieu != null) {
+            lieuEntrepriseBean.supprimerLieu(lieu.getId());
+        }
+    }
+    
+    private void resetFields() {
+        nom = null;
+        description = null;
+        latitude = 0;
+        longitude = 0;
+        lieu = null; // Réinitialiser le lieu
+    }
+    
+    public void selectLieu(Lieu lieu) {
+        this.lieu = lieu;
+        this.nom = lieu.getNom();
+        this.description = lieu.getDescription();
+        this.latitude = lieu.getLatitude();
+        this.longitude = lieu.getLongitude();
     }
 }
