@@ -13,7 +13,18 @@
         <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
+    
+    <!-- Configuration du filtre SessionControlFilter -->
+    <filter>
+             <filter-name>SessionControlFilter</filter-name>
+             <filter-class>com.mycompany.jacartavisa.business.SessionControlFilter</filter-class>
+     </filter>
+        <!-- Mapping des URL vers le filtre SessionControlFilter  -->
+       <filter-mapping>
+           <filter-name>SessionControlFilter</filter-name>
+           <url-pattern>/pages/*</url-pattern>
+       </filter-mapping>
+    
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>

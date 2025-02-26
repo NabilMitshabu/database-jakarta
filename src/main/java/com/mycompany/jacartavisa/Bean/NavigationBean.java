@@ -19,7 +19,7 @@ public class NavigationBean {
         public void ajouterLieu(){
             try{ 
                 FacesContext.getCurrentInstance().getExternalContext()
-                        .redirect("lieu.xhtml");
+                        .redirect("pages/lieu.xhtml");
             }catch (IOException e){
                 
                 e.printStackTrace();
@@ -28,7 +28,7 @@ public class NavigationBean {
     public void voirApropos(){
             try{ 
                 FacesContext.getCurrentInstance().getExternalContext()
-                        .redirect("a_propos.xhtml");
+                        .redirect("pages/a_propos.xhtml");
             }catch (IOException e){
                 
                 e.printStackTrace();

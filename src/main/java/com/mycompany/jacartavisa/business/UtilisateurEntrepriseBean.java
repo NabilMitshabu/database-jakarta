@@ -45,6 +45,16 @@ public class UtilisateurEntrepriseBean {
         return em.find(Utilisateur.class, id);
     }
     
+    public Utilisateur authentifier(String email, String password){
+        Utilisateur user = trouverUtilisateurParEmail(email);
+        
+        if(user != null && verifierMotDePasse(password, user.getPassword())){
+            return user;
+        }
+        
+        return null;
+    }
+    
     public Utilisateur TrouverUtilisateurParUsername(String username){
         try {
             return em.createQuery("SELECT u FROM Utilisateur u WHERE u.username = :username", Utilisateur.class)
@@ -68,5 +78,42 @@ public class UtilisateurEntrepriseBean {
     // Méthode pour vérifier un mot de passe 
     public boolean verifierMotDePasse(String password, String hashedPassword)
     { return BCrypt.checkpw(password, hashedPassword); }
+    
+    
+ @Transactional
+public void updateProfile(String username, String email, String description) {
+    Utilisateur utilisateur = TrouverUtilisateurParUsername(username);
+    
+    if (utilisateur != null) {
+        utilisateur.setEmail(email); // Mettre à jour l'email
+        utilisateur.setDescription(description); // Mettre à jour la description
+        em.merge(utilisateur); // Enregistrer les changements dans la base de données
+    } else {
+        throw new RuntimeException("Utilisateur non trouvé pour le nom d'utilisateur : " + username);
+    }
+}
+    
+    
+    @Transactional
+    public void updatePassword(String username, String currentPassword, String newPassword) {
+    // Trouver l'utilisateur par son nom d'utilisateur
+        Utilisateur utilisateur = TrouverUtilisateurParUsername(username);
+
+        if (utilisateur != null) {
+            // Vérifier si le mot de passe actuel est correct
+            if (verifierMotDePasse(currentPassword, utilisateur.getPassword())) {
+                // Hacher le nouveau mot de passe
+                String hashedNewPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+                utilisateur.setPassword(hashedNewPassword);
+                em.merge(utilisateur); // Mettre à jour l'utilisateur dans la base de données
+            } else {
+                throw new RuntimeException("Le mot de passe actuel est incorrect."); // Gérer l'erreur
+            }
+        } else {
+            throw new RuntimeException("Utilisateur non trouvé."); // Gérer l'erreur
+        }
+    }
+
 
 }
+

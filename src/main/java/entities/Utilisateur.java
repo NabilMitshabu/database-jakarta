@@ -45,6 +45,30 @@ public class Utilisateur {
         this.password = password;
         this.description = description;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+       return username; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
+    
+    
       
       
 }
