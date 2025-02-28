@@ -4,8 +4,12 @@ Beans\UtilisateurBean.class
 com\mycompany\jacartavisa\business\LieuEntrepriseBean.class
 entities\Lieu.class
 com\mycompany\jacartavisa\business\UtilisateurEntrepriseBean.class
+entities\Visite.class
 com\mycompany\jacartavisa\Bean\NavigationBean.class
+com\mycompany\jacartavisa\Bean\VisiteBean.class
+com\mycompany\jacartavisa\Bean\LocalDateTimeConverter.class
 com\mycompany\jacartavisa\Bean\ConvertisseurBean.class
+com\mycompany\jacartavisa\business\VisiteEntrepriseBean.class
 entities\Utilisateur.class
 com\mycompany\jacartavisa\Bean\WelcomeBean.class
 com\mycompany\jacartavisa\business\A_proposBean.class

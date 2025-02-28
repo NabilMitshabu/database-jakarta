@@ -50,6 +50,11 @@ public class Utilisateur {
         return password;
     }
 
+    public Long getId() {
+        return id;
+    }
+    
+
     public String getUsername() {
        return username; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

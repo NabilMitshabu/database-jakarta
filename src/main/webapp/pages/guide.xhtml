@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+    <h:head>
+        <title>Facelet Title</title>
+        <!-- Lien vers Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <!-- Lien vers jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Lien vers Bootstrap JS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h1 class="mt-5">Sélectionner un lieu :</h1>
+            <h:form>
+                <div class="form-group">
+                    <h:selectOneMenu value="#{lieuBean.selectedLieu}" class="form-control">
+                        <f:selectItems value="#{lieuBean.lieux}" var="lieu"
+                                       itemValue="#{lieu.id}" itemLabel="#{lieu.nom}"/>
+                        <f:ajax listener="#{lieuBean.updateWeatherMessage}" render="weather"/>
+                    </h:selectOneMenu>
+                </div>
+            </h:form>
+
+            <!-- Affichage de la météo -->
+            <div>
+                <h:outputText id="weather" value="#{lieuBean.weatherMessage}" class="mt-3"/>
+                <br/>
+                <!-- Bouton "Visiter" -->
+                <h:form>
+                    <h:commandButton value="Visiter" action="#{formulaireVisiteBean.afficherFormulaireVisite}" 
+                                     class="btn btn-primary mt-3"/>
+                </h:form>
+            </div>
+        </div>
+        
+        <div class="container mt-4" rendered="#{formulaireVisiteBean.afficherFormulaireVisite}">
+            <div class="card shadow-lg p-4 bg-white rounded">
+                <h2 class="text-center text-success"><i class="fas fa-file-alt"></i> Formulaire de Visite</h2>
+                <h:form>
+                    <div class="mb-3">
+                        <label class="form-label">Utilisateur :</label>
+                        <h:inputText value="#{formulaireVisiteBean.idUtilisateur}" type="number" required="true" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date de visite :</label>
+                        <h:inputText value="#{formulaireVisiteBean.dateVisite}" required="true" class="form-control">
+                            <f:converter converterId="localDateTimeConverter"/>
+                        </h:inputText>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Temps passé :</label>
+                        <h:inputText value="#{formulaireVisiteBean.tempsPasse}" required="true" class="form-control" type="number" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Observations :</label>
+                        <h:inputTextarea value="#{formulaireVisiteBean.observations}" class="form-control" rows="3"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Dépenses :</label>
+                        <h:inputText value="#{formulaireVisiteBean.depenses}" class="form-control" type="number" />
+                    </div>
+                    <h:commandButton value="Enregistrer" action="#{formulaireVisiteBean.sauvegarderVisite}"
+                                     styleClass="btn btn-success w-100" />
+                </h:form>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="card shadow-lg p-4 bg-white rounded">
+                <h2 class="text-center text-danger"><i class="fas fa-history"></i> Lieux déjà visités</h2>
+                <h:dataTable value="#{formulaireVisiteBean.visitesUtilisateur}" var="visite" class="table table-striped table-hover">
+                    <h:column>
+                        <f:facet name="header">Lieu</f:facet>
+                        #{visite.lieu.nom}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Date de visite</f:facet>
+                        #{visite.dateVisite}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Temps passé</f:facet>
+                        #{visite.tempsPasse}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Observations</f:facet>
+                        #{visite.observations}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Dépenses</f:facet>
+                        #{visite.depenses}
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+    </h:body>
+</html>

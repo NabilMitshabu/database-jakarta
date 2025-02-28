@@ -1,8 +1,12 @@
 import com.mycompany.jacartavisa.business.LieuEntrepriseBean;
 import entities.Lieu;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.core.MediaType;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +19,16 @@ public class LieuBean implements Serializable{
     private String description;
     private double longitude;
     private double latitude;
+    private String weatherMessage;
+    private int selectedLieu;
+    
+    
+    
     private List<Lieu> lieux = new ArrayList<>();
 
     @Inject
     private LieuEntrepriseBean lieuEntrepriseBean;
+    
     
     private Lieu lieu;
 
@@ -33,6 +43,16 @@ public class LieuBean implements Serializable{
 
     public double getLatitude() { return latitude; }
     public void setLatitude(double latitude) { this.latitude = latitude; }
+
+    public int getSelectedLieu() {
+        return selectedLieu;
+    }
+
+    public void setSelectedLieu(int selectedLieu) {
+        this.selectedLieu = selectedLieu;
+    }
+    
+    
 
     public List<Lieu> getLieux() { return lieuEntrepriseBean.listerTousLesLieux(); }
 
@@ -69,4 +89,39 @@ public class LieuBean implements Serializable{
         this.latitude = lieu.getLatitude();
         this.longitude = lieu.getLongitude();
     }
+    
+    
+    public void fetchWeatherMessage(Lieu l) {
+
+    if (l != null) {
+    // Appel au service web pour obtenir les données météorologiques
+
+    String serviceURL = "http://192.168.180.203:8080/j-weather/webapi/JarkartaWeather?latitude="+ l.getLatitude() + "&longitude=" + l.getLongitude();
+    
+    Client client = ClientBuilder.newClient();
+    String response = client.target(serviceURL)
+    .request(MediaType.TEXT_PLAIN)
+    .get(String.class);
+
+    // Enregistrement du message météo dans la variable weatherMessage
+    this.weatherMessage =response;
+}
+
+}
+
+    public void updateWeatherMessage(AjaxBehaviorEvent event) {
+
+    Lieu lieu=lieuEntrepriseBean.trouverLieuParId(selectedLieu);
+    this.fetchWeatherMessage(lieu);
+    }
+
+    public String getWeatherMessage() {
+    return weatherMessage;
+    }
+
+    public void setWeatherMessage(String weatherMessage) {
+        this.weatherMessage = weatherMessage;
+    }
+    
+     
 }
